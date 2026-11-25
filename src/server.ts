@@ -1,6 +1,6 @@
 import express from 'express';
 import { listarClientes } from './clientes.js';
-import { listarVeiculos, buscarVeiculo } from './veiculos.js';
+import { listarVeiculos, buscarVeiculo, buscarPorPlaca } from './veiculos.js';
 import { listarOrdens } from './ordens.js';
 import { listarPecas } from './estoque.js';
 
@@ -13,6 +13,12 @@ app.get('/veiculos', (_req, res) => res.json(listarVeiculos()));
 
 app.get('/veiculos/:id', (req, res) => {
   const veiculo = buscarVeiculo(Number(req.params.id));
+  if (!veiculo) return res.status(404).json({ erro: 'Veículo não encontrado' });
+  res.json(veiculo);
+});
+
+app.get('/veiculos/placa/:placa', (req, res) => {
+  const veiculo = buscarPorPlaca(req.params.placa);
   if (!veiculo) return res.status(404).json({ erro: 'Veículo não encontrado' });
   res.json(veiculo);
 });
