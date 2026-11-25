@@ -1,7 +1,7 @@
 import express from 'express';
 import { listarClientes } from './clientes.js';
 import { listarVeiculos, buscarVeiculo } from './veiculos.js';
-import { listarOrdens } from './ordens.js';
+import { listarOrdens, criarOrdem } from './ordens.js';
 import { listarPecas } from './estoque.js';
 
 export const app = express();
@@ -18,6 +18,12 @@ app.get('/veiculos/:id', (req, res) => {
 });
 
 app.get('/ordens', (_req, res) => res.json(listarOrdens()));
+
+app.post('/ordens', (req, res) => {
+  const { veiculoId, status, subtotal } = req.body;
+  const ordem = criarOrdem(veiculoId, status, subtotal);
+  res.status(201).json(ordem);
+});
 
 app.get('/estoque', (_req, res) => res.json(listarPecas()));
 
