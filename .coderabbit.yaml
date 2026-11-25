@@ -8,6 +8,10 @@ reviews:
   profile: "assertive"
   high_level_summary: true
   poem: false
+  # Veredito explícito: pede mudanças quando há findings e aprova quando as conversas são resolvidas.
+  # O bloqueio de merge em si é feito pela proteção de branch do GitHub (ver README).
+  auto_approvals:
+    enabled: true
   auto_review:
     enabled: true
     drafts: false
