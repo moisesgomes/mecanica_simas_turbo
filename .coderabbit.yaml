@@ -1,0 +1,25 @@
+# Configuração do CodeRabbit — piloto Mecânica Simas Turbo
+# Referência: https://docs.coderabbit.ai/reference/configuration
+language: "pt-BR"
+tone_instructions: "Responda sempre em português do Brasil, de forma direta e objetiva."
+
+reviews:
+  # assertive = pega mais coisa (bom para a demonstração). Depois do piloto, avaliar "chill".
+  profile: "assertive"
+  high_level_summary: true
+  poem: false
+  auto_review:
+    enabled: true
+    drafts: false
+  path_instructions:
+    - path: "src/faturamento.ts"
+      instructions: |
+        - Atenção redobrada a cálculos monetários: ordem entre desconto e imposto,
+          arredondamento e qualquer uso de ponto flutuante (float) para dinheiro.
+    - path: "src/**"
+      instructions: |
+        - Aponte SQL injection, segredos hardcoded, falta de validação de entrada,
+          acesso a valores possivelmente undefined/null e consultas N+1.
+
+chat:
+  auto_reply: true
